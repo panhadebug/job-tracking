@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import type { Application } from './pages/DashboardPage';
 import { CreateApplicationPage } from './pages/CreateApplicationPage';
@@ -57,6 +58,7 @@ const DEFAULT_APPLICATIONS: Application[] = [
 
 const App: React.FC = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [authPage, setAuthPage] = useState<'login' | 'register'>('login');
   const [currentPage, setCurrentPage] = useState<'dashboard' | 'create' | 'edit'>('dashboard');
   const [applications, setApplications] = useState<Application[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -107,6 +109,7 @@ const App: React.FC = () => {
   const handleLogin = (email: string) => {
     setUserEmail(email);
     localStorage.setItem('job_tracker_user', email);
+    setAuthPage('login');
   };
 
   const handleLogout = () => {
@@ -139,7 +142,21 @@ const App: React.FC = () => {
 
   // Router layout
   if (!userEmail) {
-    return <LoginPage onLogin={handleLogin} />;
+    if (authPage === 'register') {
+      return (
+        <RegisterPage
+          onRegister={handleLogin}
+          onNavigateToLogin={() => setAuthPage('login')}
+        />
+      );
+    }
+
+    return (
+      <LoginPage
+        onLogin={handleLogin}
+        onNavigateToRegister={() => setAuthPage('register')}
+      />
+    );
   }
 
   const renderPage = () => {

@@ -1,0 +1,19 @@
+# Environment files
+.env
+server/.env
+
+# React
+client/node_modules
+client/dist
+client/build
+
+# Laravel
+server/vendor
+server/node_modules
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

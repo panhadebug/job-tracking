@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 
 interface LoginPageProps {
   onLogin: (email: string) => void;
+  onNavigateToRegister: () => void;
 }
 
-export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigateToRegister }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
@@ -116,7 +117,10 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </form>
 
         <div className="login-footer">
-          Don't have an account? <a href="#register" onClick={(e) => e.preventDefault()}>Register</a>
+          Don't have an account?{' '}
+          <button type="button" className="link-button" onClick={onNavigateToRegister}>
+            Register
+          </button>
         </div>
       </div>
     </div>
