@@ -37,7 +37,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   const stats = useMemo(() => {
     const total = applications.length;
     // In Progress = Applied + Interview + Test
-    const inProgress = applications.filter((app) => 
+    const inProgress = applications.filter((app) =>
       app.status === 'Applied' || app.status === 'Interview' || app.status === 'Test'
     ).length;
     // Offers = Offer
@@ -48,16 +48,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   // Search, Status, and Time Filter Logic
   const filteredApplications = useMemo(() => {
     const today = new Date();
-    
+
     return applications.filter((app) => {
       // 1. Search filter (matches company or position)
       const matchesSearch =
         app.company.toLowerCase().includes(search.toLowerCase()) ||
         app.position.toLowerCase().includes(search.toLowerCase());
-      
+
       // 2. Status filter
       const matchesStatus = statusFilter === 'All' || app.status === statusFilter;
-      
+
       // 3. Time filter
       let matchesTime = true;
       const appDate = new Date(app.date);

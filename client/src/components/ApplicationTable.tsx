@@ -35,7 +35,6 @@ export const ApplicationTable: React.FC<ApplicationTableProps> = ({
       </div>
     );
   }
-
   return (
     <div className="table-responsive">
       <table className="app-table">

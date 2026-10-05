@@ -91,7 +91,7 @@ export const ApplicationForm: React.FC<ApplicationFormProps> = ({
     }
 
     const { id: _id, ...draft } = payload;
-    onSave(draft);
+    (onSave as (application: ApplicationDraft) => void)(draft);
   };
 
   return (

@@ -65,7 +65,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin, onNavigateToRegis
                 id="email"
                 type="email"
                 className="form-control input-with-icon-left"
-                placeholder="you@example.com"
+                placeholder="your@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

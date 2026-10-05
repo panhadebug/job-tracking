@@ -70,34 +70,9 @@ const App: React.FC = () => {
       setUserEmail(savedUser);
     }
 
-    const savedApps = localStorage.getItem('job_tracker_applications');
-    if (savedApps) {
-      try {
-        const parsedApps = JSON.parse(savedApps) as any[];
-        // Make sure existing data conforms to updated status names
-        const sanitisedApps = parsedApps.map(app => {
-          let status = app.status;
-          if (status === 'Interviewing') status = 'Interview';
-          if (status === 'Offered') status = 'Offer';
-          return {
-            id: app.id,
-            company: app.company,
-            position: app.position,
-            status: ['Applied', 'Interview', 'Test', 'Offer', 'Rejected'].includes(status) ? status : 'Applied',
-            date: app.date,
-            jobLink: app.jobLink || '',
-            notes: app.notes || ''
-          } as Application;
-        });
-        setApplications(sanitisedApps);
-      } catch (e) {
-        setApplications(DEFAULT_APPLICATIONS);
-      }
-    } else {
-      // Default placeholder mockup data
-      setApplications(DEFAULT_APPLICATIONS);
-      localStorage.setItem('job_tracker_applications', JSON.stringify(DEFAULT_APPLICATIONS));
-    }
+    fetch('http://127.0.0.1:8000/api/applications')
+      .then(res => res.json())
+      .then(json => setApplications(json.data));
   }, []);
 
   // Save applications to localStorage whenever they change
